@@ -16,8 +16,9 @@ jobs:
     - name: Login to Docker Hub
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      run: 
-        echo "Seeyouagain@1" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS }}
+      run: |
+        echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
 
     - name: Build the Docker image
       run: docker build -t bikensharma222/actions .
